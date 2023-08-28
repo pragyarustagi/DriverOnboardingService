@@ -70,8 +70,8 @@ public class DriverService {
         }
         try {
             if (!driver.getPassword().equals(hashPassword(signInDto.getPassword()))){
-                // passowrd doesnot match
-                throw  new AuthenticationFailException(MessageStrings.WRONG_PASSWORD);
+                // password doesnot match
+                throw new AuthenticationFailException(MessageStrings.WRONG_PASSWORD);
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

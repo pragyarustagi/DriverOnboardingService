@@ -47,7 +47,7 @@ public class DriverController {
 
     // change func name
     @GetMapping("/fetchInfo")
-    public List<Driver> findAllUser(@RequestParam(value = "token", required = true) String token) throws AuthenticationFailException {
+    public List<Driver> fetchDriverInfo(@RequestParam(value = "token", required = true) String token) throws AuthenticationFailException {
         authenticationService.authenticate(token);
         return driverRepository.findAll();
     }
@@ -115,7 +115,7 @@ public class DriverController {
         return ResponseEntity.badRequest().body("Wrong input format");
     }
 
-    private Map<String, List<MultipartFile>> groupFilesByType(MultipartFile[] files) {
+    public Map<String, List<MultipartFile>> groupFilesByType(MultipartFile[] files) {
         Map<String, List<MultipartFile>> groupedFiles = new HashMap<>();
         for (MultipartFile file : files) {
             String fileType = extractFileType(file.getOriginalFilename());
@@ -124,7 +124,7 @@ public class DriverController {
         return groupedFiles;
     }
 
-    private String extractFileType(String fileName) {
+    public String extractFileType(String fileName) {
         String lowerCaseFileName = fileName.toLowerCase();
         if (lowerCaseFileName.contains("aadharcard")) {
             return "aadharCard";
